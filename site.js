@@ -3,9 +3,19 @@ const buildHeader = () => {
 };
 
 function buildAnimalCards(animalsArray) {
+  const queryString = window.location.search.slice(1);
+
+const splitArray = queryString.split('&');
+
+const offset = Number(splitArray[0].split('=')[1]);
+const count = Number(splitArray[1].split('=')[1]);
+console.log(offset);
+console.log(count);
+
   const animalCards = animalsArray.map((element) =>
     `${buildSingleAnimalCard(element)}`);
-  return animalCards.join('')
+  const newArray = animalCards.slice(offset,count+offset);
+  return newArray.join('');
 }
 
 function buildSingleAnimalCard(singleAnimal) {
