@@ -3,14 +3,12 @@ const buildHeader = () => {
 };
 
 function buildAnimalCards(animalsArray) {
-  const animalCards = animalsArray.map((element) => {
-    `${buildSingleAnimalCard(element)}`;
-  });
-  return animalCards;
+  const animalCards = animalsArray.map((element) =>
+    `${buildSingleAnimalCard(element)}`);
+  return animalCards.join('')
 }
 
-buildSingleAnimalCard(singleAnimal);
-{
+function buildSingleAnimalCard(singleAnimal) {
   return `<div class="card">
               <img src=${singleAnimal.imageLocation} alt=${singleAnimal.alt} />
               <div class="card-text">
@@ -102,7 +100,9 @@ function buildMain() {
     },
   ];
 
-  return `<nav>
+  return `
+<article id="page-container">
+  <nav>
         <ul>
           <li>Home</li>
           <li>Page 1</li>
@@ -119,7 +119,8 @@ function buildMain() {
 
           </article>
         </main>
-      </section>`;
+      </section>
+      </article>`;
 }
 
 function buildFooter() {
