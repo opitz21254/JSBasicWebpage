@@ -56,7 +56,13 @@ if(offset < 0 && count < 0){
 //Check if the stuff in in bonds
 if(offset > 5 || offset+count > 5)
   {
-  offsetError = `This is working?`;
+
+
+
+
+  offsetError = `You have 5 animals, Your offset is ${offset} and your count is ${count}. This would result in ${offset+count} which is too big`;
+    
+  
   countError = ``;
 }
 
