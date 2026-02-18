@@ -6,16 +6,40 @@ function buildAnimalCards(animalsArray) {
   const queryString = window.location.search.slice(1);
 
 const splitArray = queryString.split('&');
+const offsetInput = splitArray[0].split('=')[1];
+const countInput = splitArray[1].split('=')[1];
+let errorMessage = ``;
+let offset = ``;
+let count = ``;
 
-const offset = Number(splitArray[0].split('=')[1]);
-const count = Number(splitArray[1].split('=')[1]);
+console.log(parseInt(splitArray[0].split('=')[1]))
+
+
+
+if(Number.isNaN(Number(offsetInput))){
+  errorMessage = `Offset was not a number, please enter a valid number`;
+}else{
+  offset = Number(offsetInput);
+}
+if(Number.isNaN(Number(countInput))){
+  errorMessage = `Count was not a number, please enter a valid number`;
+}else{
+  count = Number(countInput);
+}
+
+
 console.log(offset);
 console.log(count);
 
-  const animalCards = animalsArray.map((element) =>
-    `${buildSingleAnimalCard(element)}`);
-  const newArray = animalCards.slice(offset,count+offset);
-  return newArray.join('');
+
+if(errorMessage !== ``){
+  return `<p>${errorMessage}<p/>`;
+}else{
+    const animalCards = animalsArray.map((element) =>
+      `${buildSingleAnimalCard(element)}`);
+    const newArray = animalCards.slice(offset,count+offset);
+    return newArray.join('');
+  }
 }
 
 function buildSingleAnimalCard(singleAnimal) {
@@ -109,6 +133,10 @@ function buildMain() {
       imageLocation: "/images/waterBuffalo.jpg",
     },
   ];
+
+
+
+
 
   return `
 <article id="page-container">
