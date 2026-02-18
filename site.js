@@ -16,29 +16,29 @@ let count = ``;
 
 //Invalid numbers
 if(Number.isNaN(Number(offsetInput))){
-  offsetError = `Offset was not a number, please enter a valid number`;
+  offsetError = `Offset was a string`;
 }else{
   offset = Number(offsetInput);
 }
 if(Number.isNaN(Number(countInput))){
-  countError = `Count was not a number, please enter a valid number`;
+  countError = `, Count was a string`;
 }else{
   count = Number(countInput);
 }
 if(Number.isNaN(Number(countInput))&&Number.isNaN(Number(offsetInput))){
-  countError = `Both Offset and Count were not numbers, please enter valid numbers`;
+  countError = `Both Offset and Count were strings, please enter valid numbers`;
   offsetError = ``;
 }
 
 //Blank Detection
 if(offsetInput === ``){
-  offsetError = `Offset was blank, please enter a valid number`;
+  offsetError = `Offset had no value`;
 }
 if(countInput === ``){
-  countError = `Count was blank, please enter a valid number`;
+  countError = `, Count had no value`;
 }
 if(offsetInput === `` && countInput === ``){
-  countError = `Both were blank, please enter a valid number`;
+  countError = `Both had no value, please enter values`;
   offsetError = ``;
 }
 //Check if the number is negative
@@ -46,7 +46,7 @@ if(offset < 0){
   offsetError = `Offset is too small`;
 }
 if(count < 0){
-  countError = `Count is too small`;
+  countError = `, Count is too small`;
 }
 if(offset < 0 && count < 0){
   offsetError = `Both are too small`;
@@ -56,22 +56,17 @@ if(offset < 0 && count < 0){
 //Check if the stuff in in bonds
 if(offset > 5 || offset+count > 5)
   {
-
-
-
-
   offsetError = `You have 5 animals, Your offset is ${offset} and your count is ${count}. This would result in ${offset+count} which is too big`;
-    
-  
   countError = ``;
 }
 
-
-
-
+let finalMessage =``;
+if(countError !==``){
+  finalMessage = `, Please enter valid numbers`
+}
 
 //Combine Strings
-const comErrorStg = offsetError + countError;
+const comErrorStg = offsetError + countError+finalMessage;
 
 if(comErrorStg !== ``){
   return `<p>${comErrorStg}<p/>`;
