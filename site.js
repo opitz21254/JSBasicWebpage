@@ -8,32 +8,67 @@ function buildAnimalCards(animalsArray) {
 const splitArray = queryString.split('&');
 const offsetInput = splitArray[0].split('=')[1];
 const countInput = splitArray[1].split('=')[1];
-let errorMessage = ``;
+let countError = ``;
+let offsetError =  ``;
 let offset = ``;
 let count = ``;
 
-console.log(parseInt(splitArray[0].split('=')[1]))
 
-
-
+//Invalid numbers
 if(Number.isNaN(Number(offsetInput))){
-  errorMessage = `Offset was not a number, please enter a valid number`;
+  offsetError = `Offset was not a number, please enter a valid number`;
 }else{
   offset = Number(offsetInput);
 }
 if(Number.isNaN(Number(countInput))){
-  errorMessage = `Count was not a number, please enter a valid number`;
+  countError = `Count was not a number, please enter a valid number`;
 }else{
   count = Number(countInput);
 }
+if(Number.isNaN(Number(countInput))&&Number.isNaN(Number(offsetInput))){
+  countError = `Both Offset and Count were not numbers, please enter valid numbers`;
+  offsetError = ``;
+}
+
+//Blank Detection
+if(offsetInput === ``){
+  offsetError = `Offset was blank, please enter a valid number`;
+}
+if(countInput === ``){
+  countError = `Count was blank, please enter a valid number`;
+}
+if(offsetInput === `` && countInput === ``){
+  countError = `Both were blank, please enter a valid number`;
+  offsetError = ``;
+}
+//Check if the number is negative
+if(offset < 0){
+  offsetError = `Offset is too small`;
+}
+if(count < 0){
+  countError = `Count is too small`;
+}
+if(offset < 0 && count < 0){
+  offsetError = `Both are too small`;
+  countError = ``;
+}
+
+//Check if the stuff in in bonds
+if(offset > 5 || offset+count > 5)
+  {
+  offsetError = `This is working?`;
+  countError = ``;
+}
 
 
-console.log(offset);
-console.log(count);
 
 
-if(errorMessage !== ``){
-  return `<p>${errorMessage}<p/>`;
+
+//Combine Strings
+const comErrorStg = offsetError + countError;
+
+if(comErrorStg !== ``){
+  return `<p>${comErrorStg}<p/>`;
 }else{
     const animalCards = animalsArray.map((element) =>
       `${buildSingleAnimalCard(element)}`);
